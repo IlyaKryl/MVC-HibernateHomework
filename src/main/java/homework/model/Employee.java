@@ -32,7 +32,7 @@ public class Employee {
             joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "position_id", referencedColumnName = "id"))
     @Cascade(CascadeType.SAVE_UPDATE)
-//    @JsonIgnore
+    @JsonIgnore
     private List<Position> positions;
 
 }

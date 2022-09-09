@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
@@ -41,5 +43,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Employee employee = session.get(Employee.class, id);
         session.remove(employee);
     }
+    @Override
+    public List<Employee> getAllEmployeeBySortedSalary() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select e from Employee e order by e.salary desc ", Employee.class).getResultList();
+    }
 
+    @Override
+    public List<Employee> getOnlyRichBoys() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select e from Employee e where e.age <= 21 and e.salary > 100000",
+                Employee.class).getResultList();
+    }
 }

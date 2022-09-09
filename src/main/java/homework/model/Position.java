@@ -22,8 +22,8 @@ public class Position {
     @Enumerated(EnumType.STRING)
     private EPosition positionName;
 
-    @ManyToMany(mappedBy = "positions", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "positions", fetch = FetchType.EAGER)
     @Cascade(CascadeType.SAVE_UPDATE)
-//    @JsonIgnore
+    @JsonIgnore
     private List<Employee> employees;
 }
