@@ -20,25 +20,25 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/read/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployee(@PathVariable("id") int id) {
         Employee employee = employeeService.getEmployee(id);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    @GetMapping("/read/salary")
+    @GetMapping("/salary")
     public ResponseEntity<List<Employee>> getAllEmployeeBySortedSalary() {
         List<Employee> list = employeeService.getAllEmployeeBySortedSalary();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/read/rich")
+    @GetMapping("/rich")
     public ResponseEntity<List<Employee>> getAllRichBoys() {
         List<Employee> list = employeeService.getOnlyRichBoys();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Employee> createEmployee(@RequestBody EmployeeFormDto employeeDto) {
         Employee employee = new Employee();
         employee.setFullName(employeeDto.getFullName());
@@ -51,7 +51,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable("id") int id,
                                                    @RequestBody EmployeeFormDto employeeDto) {
         Employee employee = employeeService.getEmployee(id);
@@ -65,7 +65,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") int id) {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.OK);

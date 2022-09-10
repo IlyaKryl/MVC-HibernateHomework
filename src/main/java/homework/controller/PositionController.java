@@ -18,13 +18,13 @@ public class PositionController {
         this.positionService = positionService;
     }
 
-    @GetMapping("/read/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Position> getPosition(@PathVariable("id") int id) {
         Position position = positionService.getPosition(id);
         return new ResponseEntity<>(position, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Position> createPosition(@RequestBody PositionFormDto positionDto) {
         Position position = new Position();
         position.setPositionName(positionDto.getPositionName());
@@ -35,7 +35,7 @@ public class PositionController {
         return new ResponseEntity<>(position, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Position> updatePosition(@PathVariable("id") int id,
                                                    @RequestBody PositionFormDto positionDto) {
         Position position = positionService.getPosition(id);
@@ -46,7 +46,7 @@ public class PositionController {
         return new ResponseEntity<>(position, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePosition(@PathVariable("id") int id) {
         positionService.deletePosition(id);
         return new ResponseEntity<>(HttpStatus.OK);

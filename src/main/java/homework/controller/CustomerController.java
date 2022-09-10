@@ -18,13 +18,13 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/read/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Customer> getCustomer(@PathVariable("id") int id) {
         Customer customer = customerService.getCustomer(id);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody CustomerFormDto customerDto) {
         Customer customer = new Customer();
         customer.setFullName(customerDto.getFullName());
@@ -36,7 +36,7 @@ public class CustomerController {
         return new ResponseEntity<>(customer, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable("id") int id,
                                                    @RequestBody CustomerFormDto customerDto) {
         Customer customer = customerService.getCustomer(id);
@@ -48,7 +48,7 @@ public class CustomerController {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable("id") int id) {
         customerService.deleteCustomer(id);
         return new ResponseEntity<>(HttpStatus.OK);

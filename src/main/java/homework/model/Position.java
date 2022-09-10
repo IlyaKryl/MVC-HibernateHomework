@@ -1,7 +1,7 @@
 package homework.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -10,7 +10,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "positions")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Position {
 
     @Id

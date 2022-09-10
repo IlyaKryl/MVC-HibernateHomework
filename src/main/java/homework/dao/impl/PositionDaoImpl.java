@@ -23,10 +23,20 @@ public class PositionDaoImpl implements PositionDao {
         return session.get(Position.class, id);
     }
 
+    private boolean existsByPositionName(Position position) {
+        Session session = sessionFactory.getCurrentSession();
+        Position pos = session.get(Position.class, position.getPositionName());
+        return pos != null;
+    }
+
     @Override
     public void create(Position position) {
         Session session = sessionFactory.getCurrentSession();
-        session.persist(position);
+        if (!existsByPositionName(position)) {
+            session.persist(position);
+        } else {
+            session.merge(position);
+        }
     }
 
     @Override

@@ -1,6 +1,6 @@
 package homework.model;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -9,7 +9,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "projects")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Project {
 
     @Id
