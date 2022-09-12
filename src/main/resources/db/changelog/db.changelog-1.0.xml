@@ -1,0 +1,152 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="1.0.0" author="ilya.krylov">
+        <createTable tableName="customers">
+            <column name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="full_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.1" author="ilya.krylov">
+        <createTable tableName="projects">
+            <column name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="project_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="INT">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.2" author="ilya.krylov">
+        <createTable tableName="employees">
+            <column name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="full_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salary" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="INT">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.3" author="ilya.krylov">
+        <createTable tableName="positions">
+            <column name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="position_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.4" author="ilya.krylov">
+        <createTable tableName="employee_positions">
+            <column name="employee_id" type="INT">
+            </column>
+
+            <column name="position_id" type="INT">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.5" author="ilya.krylov">
+        <addForeignKeyConstraint baseTableName="employee_positions"
+                                 baseColumnNames="employee_id"
+                                 constraintName="fk_employee_positions_employee"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="employees"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="1.0.6" author="ilya.krylov">
+        <addForeignKeyConstraint baseTableName="employee_positions"
+                                 baseColumnNames="position_id"
+                                 constraintName="fk_employee_positions_position"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="positions"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="1.0.7" author="ilya.krylov">
+        <addForeignKeyConstraint baseTableName="employees"
+                                 baseColumnNames="project_id"
+                                 constraintName="fk_employees_project"
+                                 referencedTableName="projects"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="1.0.8" author="ilya.krylov">
+        <addForeignKeyConstraint baseTableName="projects"
+                                 baseColumnNames="customer_id"
+                                 constraintName="fk_projects_customer"
+                                 referencedTableName="customers"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="1.0.9" author="ilya.krylov">
+        <insert tableName="positions">
+            <column name="position_name" value="BACKEND_DEVELOPER"/>
+        </insert>
+
+        <insert tableName="positions">
+            <column name="position_name" value="FRONTEND_DEVELOPER"/>
+        </insert>
+
+        <insert tableName="positions">
+            <column name="position_name" value="SYSTEM_ARCHITECT"/>
+        </insert>
+
+        <insert tableName="positions">
+            <column name="position_name" value="TEAM_LEAD"/>
+        </insert>
+
+        <insert tableName="positions">
+            <column name="position_name" value="PROJECT_MANAGER"/>
+        </insert>
+
+        <insert tableName="positions">
+            <column name="position_name" value="PRODUCT_MANAGER"/>
+        </insert>
+
+        <insert tableName="positions">
+            <column name="position_name" value="QA"/>
+        </insert>
+
+        <insert tableName="positions">
+            <column name="position_name" value="DESIGNER"/>
+        </insert>
+
+        <insert tableName="positions">
+            <column name="position_name" value="MARKETER"/>
+        </insert>
+
+        <insert tableName="positions">
+            <column name="position_name" value="ANALYST"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
