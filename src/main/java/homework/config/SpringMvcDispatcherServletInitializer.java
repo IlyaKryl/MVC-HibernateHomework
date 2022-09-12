@@ -9,7 +9,7 @@ public class SpringMvcDispatcherServletInitializer extends AbstractAnnotationCon
     }
 
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{Config.class};
+        return new Class[]{MvcConfig.class};
     }
 
     protected String[] getServletMappings() {

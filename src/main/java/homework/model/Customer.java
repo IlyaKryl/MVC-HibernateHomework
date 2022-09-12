@@ -1,5 +1,6 @@
 package homework.model;
 
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -12,6 +13,7 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "Detail about customers")
 public class Customer {
 
     @Id
